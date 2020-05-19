@@ -8,15 +8,15 @@ from time import sleep
 load_dotenv()
 
 
-def query_games(gameIds):
+def query_games(game_ids):
 
     if not os.path.isfile('Data/pickles/riotapi_res_pickle'):
 
-        # Riot games api allows 20 requests per second
+        # Riot games api allows 100 requests per 2 min
         counter = 0
 
         game_meta_df = pd.DataFrame()
-        for gameId in gameIds:
+        for gameId in game_ids:
             print(game_meta_df)
             if counter == 100:
                 counter = 0
@@ -68,7 +68,8 @@ def parse_json(response):
 
     return parsed_json
 
-
+# Repetitively poll riot games (sorry riot)
+# A random 504 error would occur sometimes, this is to prevent that.
 def query_game(gameId):
     watcher = LolWatcher(os.getenv("API_KEY"))
     while True:

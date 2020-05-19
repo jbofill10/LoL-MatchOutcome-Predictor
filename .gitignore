@@ -1,5 +1,6 @@
 .env
 .idea
+Data/df.csv
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

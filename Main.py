@@ -1,5 +1,8 @@
+from EDA import Target
+
 import pandas as pd
 import QueryGames
+import FeatureEngineering
 
 
 def main():
@@ -11,8 +14,9 @@ def main():
 
     df = pd.concat([df, meta_df], axis=1)
 
-    print(df.head())
+    df = FeatureEngineering.feature_engineer(df)
 
+    Target.target_eda(df)
 
 if __name__ == '__main__':
     main()
