@@ -5,11 +5,11 @@ import matplotlib.pyplot as plt
 
 def target_eda(df):
     fig = go.Figure()
-    blueWins = df[df['blueWins'] == 1]
-    blueLoss = df[df['blueWins'] == 0]
+    blue_wins = df[df['blueWins'] == 1]
+    blue_loss = df[df['blueWins'] == 0]
 
-    fig.add_trace(go.Bar(x=blueWins['blueWins'], y=list(blueWins['blueWins'].value_counts()), name='Blue', marker_color='#0045D7'))
-    fig.add_trace(go.Bar(x=blueLoss['blueWins'], y=list(blueLoss['blueWins'].value_counts()), name='Red',
+    fig.add_trace(go.Bar(x=blue_wins['blueWins'], y=list(blue_wins['blueWins'].value_counts()), name='Blue', marker_color='#0045D7'))
+    fig.add_trace(go.Bar(x=blue_loss['blueWins'], y=list(blue_loss['blueWins'].value_counts()), name='Red',
                          marker_color=['#FD000D']))
 
     fig.update_layout(

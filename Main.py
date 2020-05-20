@@ -1,4 +1,4 @@
-from EDA import Target
+from EDA import Target, Features
 
 import pandas as pd
 import QueryGames
@@ -16,7 +16,9 @@ def main():
 
     df = FeatureEngineering.feature_engineer(df)
 
-    Target.target_eda(df)
+    Features.feature_eda(df)
+    
+    #Target.target_eda(df)
 
 if __name__ == '__main__':
     main()
