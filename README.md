@@ -22,7 +22,7 @@ Having more information than your opponent in any game is one of the biggest adv
 
 On average, about 20 wards a game are placed. It is interesting and mind boggling how some games have up to 276 wards placed.
 
-It is clear that the distribution of wards placed is left skewed and will require a transformation we fit the data to a model.
+It is clear that the distribution of wards placed is left skewed and will require a transformation before fitting the data to a model.
 
 ![image](Charts/WardsPlacedZoom.png)
 
