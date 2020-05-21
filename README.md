@@ -29,3 +29,21 @@ It is clear that the distribution of wards placed is left skewed and will requir
 Here we can see that there is a slight trend with the amount of wards placed and a team winning. Usually the winning team has a larger amount of wards placed that game.
 
 Both blue and red have a higher mean of wards placed when winning, but it is not that clear for blue side as it is with red.
+
+### Wards Destroyed
+
+Similar to wards being so important due to the information they can provide to the team, denying that information is also key to winning. Due to this idea, I would suspect that the team with more destroyed wards has a better chance of winning the game.
+
+![image](Charts/WardsDestroyed.png)
+
+In the range of 0-2 wards destroyed, there isn't a trend at all regarding the outcome of the game. Once the wards destroyed count exceeds 3, there is a clear trend that destroyed ward count correlates with winning. This is most likely due to the fact that if so many wards are destroyed that quickly, the team is dominating / being very aggressive and putting a lot of pressure on the other time.
+
+### First Kills
+
+First bloods are important because it provides gold for the team, which allows wards to be set up early. This will prevent the jungler from ganking as well.
+
+![image](Charts/FirstKills.png)
+
+This bar graph takes the sum of games where a certain team got fiirst blood. It is clear that teams that got a first kill are more likely to win, since it does provide advantages as stated earlier.
+  
+But it is also possible that the team was just overall better and won regardless of the "first blood advantage".
