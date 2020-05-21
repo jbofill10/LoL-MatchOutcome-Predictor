@@ -22,7 +22,7 @@ Having more information than your opponent in any game is one of the biggest adv
 
 On average, about 20 wards a game are placed. It is interesting and mind boggling how some games have up to 276 wards placed.
 
-It is clear that the distribution of wards placed is left skewed and will require a transformation we fit the data to a model.
+It is clear that the distribution of wards placed is left skewed and will require a transformation before fitting the data to a model.
 
 ![image](Charts/WardsPlacedZoom.png)
 
@@ -47,3 +47,4 @@ First bloods are important because it provides gold for the team, which allows w
 This bar graph takes the sum of games where a certain team got fiirst blood. It is clear that teams that got a first kill are more likely to win, since it does provide advantages as stated earlier.
   
 But it is also possible that the team was just overall better and won regardless of the "first blood advantage".
+
