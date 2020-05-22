@@ -48,3 +48,20 @@ This bar graph takes the sum of games where a certain team got fiirst blood. It 
   
 But it is also possible that the team was just overall better and won regardless of the "first blood advantage".
 
+### Team Kills
+Kills in League are very important because it slows down the progression of your opponents build, along with giving you gold to upgrade your champion. For this reason, it is pretty clear that kills will be a very important indicator of whether a team wins or loses
+
+![image](Charts/Kills.png)
+
+The distribution of all the variations in this histogram are right skewed slightly.
+
+![image](Charts/AvgKills.png)
+
+As expected, teams that have more kills generally win more games.
+
+### Team Deaths
+If kills are vital to the success of a team, it must mean that survivability is also very important. This means that most likely the team that dies least has the higher chance of winning.
+
+![image](Charts/TeamDeaths.png)
+
+As suspected, Teams that win tend to die less on average.
