@@ -173,7 +173,7 @@ def feature_eda(df):
     ])
 
     fig.update_layout(
-        title='Epic Monsters Summoned when Winning and Losing',
+        title='Epic Monsters Killed',
         height=800,
         width=1200,
         yaxis=dict(
@@ -183,7 +183,7 @@ def feature_eda(df):
         ),
     )
 
-    #fig.show()
+    fig.show()
 
     fig = go.Figure(data=[
         go.Bar(name='Blue Win', y=[0], x=[np.mean(blue_win['blueHeralds'])], width=0.5, orientation='h'),
