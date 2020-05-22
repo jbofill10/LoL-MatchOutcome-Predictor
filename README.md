@@ -65,3 +65,49 @@ If kills are vital to the success of a team, it must mean that survivability is 
 ![image](Charts/TeamDeaths.png)
 
 As suspected, Teams that win tend to die less on average.
+
+### Assists
+
+The team with more assists also means that team has more kills which should give them the advantage over their opponents. I expect the team with more assists to win more games
+![image](Charts/Assists.png)
+
+It is evident that teams with more assists end up winning more games.
+
+### Towers Destroyed
+
+Towers prevent the enemy team from attacking the Nexus. The more towers that are destroyed, the easier it becomes to attack the Nexus.  
+Due to this idea, teams that win would have destoryed more towers than their opponents.
+
+![image](Charts/TowersDestroyed.png)
+
+In the first 10 min, usually no towers are destroyed. If one is destroyed, usually that team wins.
+
+### Epic Monsters
+
+Epic Monsters are important provide high gold/experience and buffs to the team that defeats them. This in turn provides an advantage for the team. I would expect to see that teams will win more on average if they kill more epic monsters.
+
+![image](Charts/EpicMonsters.png)
+
+Due to the rewards epic monsters provide, there is a definite advantage to the team with more monster kills.
+
+### Total Experience
+
+The more experience a champion has earned, the stronger the build the champion will have. Therefore teams that win will most likely have more experience.
+
+![image](Charts/TotalExperience.png)
+
+### Total Gold
+
+Stronger items and upgrades to items can be obtained with gold. So most likely the teams that win will have more gold since they had stronger champions that contributed to winning the game.
+
+![image](Charts/TotalGold.png)
+
+### CS Per Min
+
+Creep Score, or CS, is one of the most important aspects of League. Having a good creep score means a reliable and steady amount of income, which is pointed out earlier is very important for winning games. Due to this, I know for sure that the winning teams will have higher CS than the losing teams.
+
+![image](Charts/CSPerMin.png)
+
+
+
+
