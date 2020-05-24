@@ -14,11 +14,11 @@ def main():
 
     df = pd.concat([df, meta_df], axis=1)
 
-    df = FeatureEngineering.feature_engineer(df)
-
     Features.feature_eda(df)
     
     #Target.target_eda(df)
+
+    df = FeatureEngineering.feature_engineer(df)
 
 if __name__ == '__main__':
     main()

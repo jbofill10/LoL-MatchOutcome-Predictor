@@ -108,6 +108,22 @@ Creep Score, or CS, is one of the most important aspects of League. Having a goo
 
 ![image](Charts/CSPerMin.png)
 
+### Champion Bans
 
+#### When Blue Wins
+![image](Charts/bans/blue/ban_1.png) ![image](Charts/bans/blue/ban_2.png)  
+![image](Charts/bans/blue/ban_3.png) ![image](Charts/bans/blue/ban_4.png)  
+![image](Charts/bans/blue/ban_5.png) ![image](Charts/bans/blue/ban_6.png)  
+![image](Charts/bans/blue/ban_7.png) ![image](Charts/bans/blue/ban_8.png)  
+![image](Charts/bans/blue/ban_9.png) ![image](Charts/bans/blue/ban_10.png)  
+ 
+It seems that people in diamond and master are not fond of Kassadin at all. I would assume that bans when red team wins will consist of the same champions in these bans
 
+#### When Red Wins
+![image](Charts/bans/red/ban_1.png) ![image](Charts/bans/red/ban_2.png)  
+![image](Charts/bans/red/ban_3.png) ![image](Charts/bans/red/ban_4.png)  
+![image](Charts/bans/red/ban_5.png) ![image](Charts/bans/red/ban_6.png)  
+![image](Charts/bans/red/ban_7.png) ![image](Charts/bans/red/ban_8.png)  
+![image](Charts/bans/red/ban_9.png) ![image](Charts/bans/red/ban_10.png) 
 
+As expected, the same 5 champions were shown again. 

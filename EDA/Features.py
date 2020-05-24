@@ -1,10 +1,15 @@
+from plotly.subplots import make_subplots
+
 import plotly.graph_objs as go
 import seaborn as sns
 import matplotlib.pyplot as plt
 import numpy as np
+import Champion
 
 
 def feature_eda(df):
+
+    df['redWins'] = df['blueWins'].apply(lambda x: 1 if x == 0 else 0)
 
     blue_win = df[df['blueWins'] == 1]
     red_win = df[df['blueWins'] == 0]
@@ -183,7 +188,7 @@ def feature_eda(df):
         ),
     )
 
-    fig.show()
+    #fig.show()
 
     fig = go.Figure(data=[
         go.Bar(name='Blue Win', y=[0], x=[np.mean(blue_win['blueHeralds'])], width=0.5, orientation='h'),
@@ -310,6 +315,50 @@ def feature_eda(df):
     )
 
     #fig.show()
+
+    blue_fig = go.Figure()
+    red_fig = go.Figure()
+
+    bans = ['ban_1', 'ban_2', 'ban_3', 'ban_4', 'ban_5',
+            'ban_6', 'ban_7', 'ban_8', 'ban_9', 'ban_10']
+
+    for ban in bans:
+        blue_win_ban = blue_win[ban].value_counts()
+        red_win_ban = red_win[ban].value_counts()
+
+        blue_bans = Champion.get_champions(list(blue_win_ban.head(5).keys()))
+        red_bans = Champion.get_champions(list(red_win_ban.head(5).keys()))
+
+        blue_fig.add_trace(go.Pie(
+            name=ban,
+            labels=blue_bans,
+            values=blue_win_ban.values
+        ))
+
+        blue_fig.update_layout(
+            title='{} {}'.format(ban[0:3].capitalize(), ban[4:]),
+            width=500,
+            height=500
+        )
+
+        red_fig.add_trace(go.Pie(
+            name=ban,
+            labels=red_bans,
+            values=red_win_ban.values
+        ))
+
+        red_fig.update_layout(
+            title='{} {}'.format(ban[0:3].capitalize(), ban[4:]),
+            width=500,
+            height=500
+        )
+
+        #blue_fig.show()
+        #red_fig.show()
+
+
+
+
 
 
 
