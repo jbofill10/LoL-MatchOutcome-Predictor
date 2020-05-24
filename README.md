@@ -42,7 +42,7 @@ In the range of 0-2 wards destroyed, there isn't a trend at all regarding the ou
 
 First bloods are important because it provides gold for the team, which allows wards to be set up early. This will prevent the jungler from ganking as well.
 
-![image](Charts/FirstKills.png)
+![image](Charts/FirstBloods.png)
 
 This bar graph takes the sum of games where a certain team got fiirst blood. It is clear that teams that got a first kill are more likely to win, since it does provide advantages as stated earlier.
   
