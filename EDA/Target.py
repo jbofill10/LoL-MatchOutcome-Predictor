@@ -24,4 +24,4 @@ def target_eda(df):
         width=1200
     )
 
-    fig.show()
+    #fig.show()

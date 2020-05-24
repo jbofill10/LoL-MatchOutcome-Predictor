@@ -8,7 +8,6 @@ import Champion
 
 
 def feature_eda(df):
-
     df['redWins'] = df['blueWins'].apply(lambda x: 1 if x == 0 else 0)
 
     blue_win = df[df['blueWins'] == 1]
@@ -33,7 +32,7 @@ def feature_eda(df):
         width=1200
     )
 
-    #fig.show()
+    # fig.show()
 
     '''
 
@@ -54,7 +53,7 @@ def feature_eda(df):
         width=1200
     )
 
-    #fig.show()
+    # fig.show()
 
     '''
     
@@ -80,7 +79,7 @@ def feature_eda(df):
         ),
     )
 
-    #fig.show()
+    # fig.show()
 
     '''
 
@@ -101,7 +100,7 @@ def feature_eda(df):
         width=1200,
     )
 
-    #fig.show()
+    # fig.show()
 
     fig = go.Figure(data=[
         go.Bar(name='Blue Win', x=[0], y=[np.mean(blue_win['blueKills'])], width=0.5),
@@ -122,8 +121,7 @@ def feature_eda(df):
         ),
     )
 
-    #fig.show()
-
+    # fig.show()
 
     '''
 
@@ -149,7 +147,13 @@ def feature_eda(df):
             title='Team'
         ),
     )
-    #fig.show()
+    # fig.show()
+
+    '''
+    
+    Assists
+    
+    '''
 
     fig = go.Figure(data=[
         go.Bar(name='Blue Win', x=[0], y=[np.mean(blue_win['blueAssists'])], width=0.5),
@@ -169,7 +173,13 @@ def feature_eda(df):
         ),
     )
 
-    #fig.show()
+    # fig.show()
+
+    '''
+
+    Epic Monsters
+
+    '''
 
     fig = go.Figure(data=[
         go.Bar(name='Blue Win', y=[0], x=[np.sum(blue_win['blueEliteMonsters'])], width=0.5, orientation='h'),
@@ -189,7 +199,13 @@ def feature_eda(df):
         ),
     )
 
-    #fig.show()
+    # fig.show()
+
+    '''
+
+    Rift Heralds
+
+    '''
 
     fig = go.Figure(data=[
         go.Bar(name='Blue Win', y=[0], x=[np.mean(blue_win['blueHeralds'])], width=0.5, orientation='h'),
@@ -211,6 +227,12 @@ def feature_eda(df):
 
     # fig.show()
 
+    '''
+
+    Towers Destroyed
+
+    '''
+
     fig = go.Figure(data=[
         go.Histogram(name='Blue Win', x=blue_win['blueTowersDestroyed']),
         go.Histogram(name='Blue Loss', x=red_win['blueTowersDestroyed']),
@@ -224,8 +246,13 @@ def feature_eda(df):
         width=1200,
     )
 
-    #fig.show()
+    # fig.show()
 
+    '''
+
+    Gold
+
+    '''
 
     fig = go.Figure(data=[
         go.Violin(name='Blue Win', y=blue_win['blueTotalGold'], meanline_visible=True),
@@ -240,7 +267,13 @@ def feature_eda(df):
         width=1200,
     )
 
-    #fig.show()
+    # fig.show()
+
+    '''
+
+    Champ levels
+
+    '''
 
     fig = go.Figure(data=[
         go.Histogram(name='Blue Win', x=blue_win['blueAvgLevel']),
@@ -257,6 +290,12 @@ def feature_eda(df):
 
     # fig.show()
 
+    '''
+
+    EXP
+
+    '''
+
     fig = go.Figure(data=[
         go.Box(name='Blue Win', x=blue_win['blueTotalExperience']),
         go.Box(name='Blue Loss', x=red_win['blueTotalExperience']),
@@ -272,6 +311,12 @@ def feature_eda(df):
 
     # fig.show()
 
+    '''
+
+    Minions Killed
+
+    '''
+
     fig = go.Figure(data=[
         go.Violin(name='Blue Win', y=blue_win['blueTotalMinionsKilled'], meanline_visible=True),
         go.Violin(name='Blue Loss', y=red_win['blueTotalMinionsKilled'], meanline_visible=True),
@@ -285,7 +330,13 @@ def feature_eda(df):
         width=1200,
     )
 
-    #fig.show()
+    # fig.show()
+
+    '''
+
+    Jungle Monsters
+
+    '''
 
     fig = go.Figure(data=[
         go.Violin(name='Blue Win', y=blue_win['blueTotalJungleMinionsKilled'], meanline_visible=True),
@@ -300,7 +351,13 @@ def feature_eda(df):
         width=1200,
     )
 
-    #fig.show()
+    # fig.show()
+
+    '''
+
+    CS
+
+    '''
 
     fig = go.Figure(data=[
         go.Box(name='Blue Win', x=blue_win['blueCSPerMin']),
@@ -315,59 +372,89 @@ def feature_eda(df):
         width=1200,
     )
 
-    #fig.show()
+    # fig.show()
 
-    blue_fig = go.Figure()
-    red_fig = go.Figure()
+    '''
+
+    Bans
+
+    '''
 
     bans = ['ban_1', 'ban_2', 'ban_3', 'ban_4', 'ban_5',
             'ban_6', 'ban_7', 'ban_8', 'ban_9', 'ban_10']
 
     for ban in bans:
-        blue_win_ban = blue_win[ban].value_counts()
-        red_win_ban = red_win[ban].value_counts()
 
-        blue_bans = Champion.get_champions(list(blue_win_ban.head(5).keys()))
-        red_bans = Champion.get_champions(list(red_win_ban.head(5).keys()))
+        fig = make_subplots(rows=1, cols=2, specs=[[{'type': 'domain'}, {'type': 'domain'}]],
+                            subplot_titles=('Blue {} {}'.format(ban[0:3], ban[4:]),
+                                            'Red {} {}'.format(ban[0:3], ban[4:]))
+                            )
 
-        blue_fig.add_trace(go.Pie(
+        row = 1
+
+        blue_win_all_ban = blue_win[ban].value_counts()
+        red_win_ban_all_ban = red_win[ban].value_counts()
+
+        blue_win_top_10 = blue_win[ban].value_counts().head(20)
+        red_win_top_10 = red_win[ban].value_counts().head(20)
+
+        blue_win_other = np.abs(np.sum(blue_win_top_10) - np.sum(blue_win_all_ban))
+        red_win_other = np.abs(np.sum(red_win_top_10) - np.sum(red_win_ban_all_ban))
+
+        blue_vals = blue_win_top_10.values
+        red_vals = red_win_top_10.values
+
+        blue_vals = np.append(blue_vals, blue_win_other)
+        red_vals = np.append(red_vals, red_win_other)
+
+        blue_bans = Champion.get_champions(list(blue_win_top_10.keys()))
+        red_bans = Champion.get_champions(list(red_win_top_10.keys()))
+
+        fig.add_trace(go.Pie(
             name=ban,
-            labels=blue_bans,
-            values=blue_win_ban.values
-        ))
-
-        blue_fig.update_layout(
-            title='Blue {} {}'.format(ban[0:3].capitalize(), ban[4:]),
-            width=400,
-            height=400
+            labels=blue_bans + ['Other'],
+            values=blue_vals),
+            row=1,
+            col=1
         )
 
-        red_fig.add_trace(go.Pie(
+        fig.add_trace(go.Pie(
             name=ban,
-            labels=red_bans,
-            values=red_win_ban.values
-        ))
-
-        red_fig.update_layout(
-            title='Red {} {}'.format(ban[0:3].capitalize(), ban[4:]),
-            width=400,
-            height=400
+            labels=red_bans + ['Other'],
+            values=red_vals),
+            row=1,
+            col=2
         )
 
-        #blue_fig.show()
-        #red_fig.show()
+        fig.update_layout(
+            height=600,
+            width=900
+        )
 
+        #fig.show()
 
+    '''
+    
+    Champs
+    
+    '''
 
+    champs = ['blue_champ_1', 'blue_champ_2', 'blue_champ_3', 'blue_champ_4', 'blue_champ_5',
+              'red_champ_1', 'red_champ_2', 'red_champ_3', 'red_champ_4', 'red_champ_5']
 
+    champs_formatted = Champion.format_champs(df, champs, 35)
 
+    fig = go.Figure(data=[
+        go.Pie(
+            labels=list(champs_formatted.keys()),
+            values=list(champs_formatted.values())
+        )
+    ])
 
+    fig.update_layout(
+        height=900,
+        width=900,
+        title='Most Frequently Selected Champions'
+    )
 
-
-
-
-
-
-
-
-
+    fig.show()

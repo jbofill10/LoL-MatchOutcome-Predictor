@@ -109,27 +109,33 @@ Creep Score, or CS, is one of the most important aspects of League. Having a goo
 ![image](Charts/CSPerMin.png)
 
 ### Champion Bans
-These are the most frequent bans when a team wins. Unfortunately the API doesn't give information on who picked first, so when it says "Blue" or "Red" it just means the team that won
+These are the 20 most frequent bans when a team wins. Unfortunately the API doesn't give information on who picked first, so when it says "Blue" or "Red" it just means the team that won
+In th legend, the champions go in order of most frequent. For example, Other is the most banned, followed by Kassadin in Ban 1.
 #### Ban 1
-![image](Charts/bans/blue/ban_1.png) ![image](Charts/bans/red/ban_1.png)  
+![image](Charts/bans/ban_1.png)
 #### Ban 2 
-![image](Charts/bans/blue/ban_2.png) ![image](Charts/bans/red/ban_2.png)  
+![image](Charts/bans/ban_2.png)
 #### Ban 3
-![image](Charts/bans/blue/ban_3.png) ![image](Charts/bans/red/ban_3.png)  
+![image](Charts/bans/ban_3.png)  
 #### Ban 4 
-![image](Charts/bans/blue/ban_4.png) ![image](Charts/bans/red/ban_4.png)  
+![image](Charts/bans/ban_4.png)
 #### Ban 5   
-![image](Charts/bans/blue/ban_5.png) ![image](Charts/bans/red/ban_5.png)  
+![image](Charts/bans/ban_5.png)
 #### Ban 6 
-![image](Charts/bans/blue/ban_6.png) ![image](Charts/bans/red/ban_6.png)  
+![image](Charts/bans/ban_6.png)
 #### Ban 7 
-![image](Charts/bans/blue/ban_7.png) ![image](Charts/bans/red/ban_7.png)  
+![image](Charts/bans/ban_7.png)
 #### Ban 8  
-![image](Charts/bans/blue/ban_8.png) ![image](Charts/bans/red/ban_8.png)  
+![image](Charts/bans/ban_8.png)
 #### Ban 9
-![image](Charts/bans/blue/ban_9.png) ![image](Charts/bans/red/ban_9.png)  
-#### Ban 10 
-![image](Charts/bans/blue/ban_10.png) ![image](Charts/bans/red/ban_10.png)   
- 
+![image](Charts/bans/ban_9.png)
+#### Ban 10
+![image](Charts/bans/ban_10.png)
+
 It seems that people in diamond and master are not fond of Kassadin at all.
 Generally, it seems that the ban selections are very strict at the top level of play.
+
+### Champion Selections
+#### Among Winning and Losing Teams
+![image](Charts/MostSelectedChampions.png)
+The idea presented by the pie chart makes sense, as usually team composition related games typically have metas between patches or seasons. So it makes sense to see champions that work best together to have pick rates close to one anothers.
