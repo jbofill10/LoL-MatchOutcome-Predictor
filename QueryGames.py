@@ -17,7 +17,7 @@ def query_games(game_ids):
 
         game_meta_df = pd.DataFrame()
         for gameId in game_ids:
-            print(game_meta_df)
+
             if counter == 100:
                 counter = 0
                 sleep(120)
@@ -28,7 +28,7 @@ def query_games(game_ids):
 
             counter += 1
 
-        print(game_meta_df)
+        #print(game_meta_df)
         game_meta_df.to_pickle('Data/pickles/riotapi_res_pickle')
     else:
         game_meta_df = pd.read_pickle('Data/pickles/riotapi_res_pickle')
