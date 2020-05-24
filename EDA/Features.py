@@ -63,10 +63,10 @@ def feature_eda(df):
     '''
 
     fig = go.Figure(data=[
-        go.Bar(name='Blue Win', x=blue_win['blueFirstBlood'], y=[np.sum(blue_win['blueFirstBlood'])]),
-        go.Bar(name='Blue Loss', x=red_win['blueFirstBlood'], y=[np.sum(red_win['blueFirstBlood'])]),
-        go.Bar(name='Red Win', x=red_win['redFirstBlood'], y=[np.sum(red_win['redFirstBlood'])]),
-        go.Bar(name='Red Loss', x=blue_win['redFirstBlood'], y=[np.sum(blue_win['redFirstBlood'])])
+        go.Bar(name='Blue Win', x=[0], y=[np.sum(blue_win['blueFirstBlood'])], width=0.5),
+        go.Bar(name='Blue Loss', x=[1], y=[np.sum(red_win['blueFirstBlood'])], width=0.5),
+        go.Bar(name='Red Win', x=[2], y=[np.sum(red_win['redFirstBlood'])], width=0.5),
+        go.Bar(name='Red Loss', x=[3], y=[np.sum(blue_win['redFirstBlood'])], width=0.5)
     ])
 
     fig.update_layout(
@@ -74,8 +74,9 @@ def feature_eda(df):
         height=800,
         width=1200,
         xaxis=dict(
-            showticklabels=False,
-            title='Team'
+            tickvals=[i for i in range(4)],
+            ticktext=[i for i in ['Blue Win', 'Blue Loss', 'Red Win', 'Red Loss']],
+            showticklabels=True
         ),
     )
 
@@ -354,7 +355,10 @@ def feature_eda(df):
         )
 
         #blue_fig.show()
-        red_fig.show()
+        #red_fig.show()
+
+
+
 
 
 

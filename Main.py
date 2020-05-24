@@ -16,7 +16,7 @@ def main():
 
     Features.feature_eda(df)
     
-    #Target.target_eda(df)
+    Target.target_eda(df)
 
     df = FeatureEngineering.feature_engineer(df)
 
