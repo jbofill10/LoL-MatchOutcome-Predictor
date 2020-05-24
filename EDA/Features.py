@@ -336,9 +336,9 @@ def feature_eda(df):
         ))
 
         blue_fig.update_layout(
-            title='{} {}'.format(ban[0:3].capitalize(), ban[4:]),
-            width=500,
-            height=500
+            title='Blue {} {}'.format(ban[0:3].capitalize(), ban[4:]),
+            width=400,
+            height=400
         )
 
         red_fig.add_trace(go.Pie(
@@ -348,13 +348,13 @@ def feature_eda(df):
         ))
 
         red_fig.update_layout(
-            title='{} {}'.format(ban[0:3].capitalize(), ban[4:]),
-            width=500,
-            height=500
+            title='Red {} {}'.format(ban[0:3].capitalize(), ban[4:]),
+            width=400,
+            height=400
         )
 
         #blue_fig.show()
-        #red_fig.show()
+        red_fig.show()
 
 
 
