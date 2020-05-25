@@ -139,3 +139,13 @@ Generally, it seems that the ban selections are very strict at the top level of 
 #### Among Winning and Losing Teams
 ![image](Charts/MostSelectedChampions.png)
 The idea presented by the pie chart makes sense, as usually team composition related games typically have metas between patches or seasons. So it makes sense to see champions that work best together to have pick rates close to one anothers.
+
+#### Blue Winning
+I suspect the choices to be relatively similar to the champion selection visualization embodying winning and losing teams
+![image](Charts/ChampSelectionBlueWin_RedLose.png) 
+It's interesting to see that Lee Sin is selected more on Red when they lose. I don't think this contributes to Red losing though.
+#### Red Winning
+![image](Charts/ChampSelectionRedWin_BlueLose.png)
+Interesting that when blue loses, Lee Sin is very popular. At the same time, Lee Sin is the third most fequent pick when Red wins.
+
+  

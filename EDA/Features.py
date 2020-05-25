@@ -435,7 +435,7 @@ def feature_eda(df):
 
     '''
     
-    Champs
+    Champs, win and lose
     
     '''
 
@@ -457,4 +457,88 @@ def feature_eda(df):
         title='Most Frequently Selected Champions'
     )
 
+    #fig.show()
+
+    '''
+        
+        Team separated champ selections
+    
+    '''
+
+    blue_champs = champs[0:5]
+    red_champs = champs[5:]
+
+    blue_win_champs_formatted = Champion.format_champs(blue_win, blue_champs, 25)
+    blue_lose_champs_formatted = Champion.format_champs(red_win, blue_champs, 25)
+
+    red_win_champs_formatted = Champion.format_champs(red_win, red_champs, 25)
+    red_lose_champs_formatted = Champion.format_champs(blue_win, red_champs, 25)
+
+    fig = make_subplots(rows=1, cols=2, specs=[[{'type': 'domain'}, {'type': 'domain'}]],
+                        subplot_titles=('Top 25 Blue Champion Selections (Win)',
+                                        'Top 25 Red Champion Selections (Lose)')
+                        )
+
+    fig.add_trace(
+        go.Pie(
+            name='Blue',
+            labels=list(blue_win_champs_formatted.keys()),
+            values=list(blue_win_champs_formatted.values())
+        ),
+        row=1,
+        col=1
+    )
+
+    fig.add_trace(
+        go.Pie(
+            name='Red',
+            labels=list(red_lose_champs_formatted.keys()),
+            values=list(red_lose_champs_formatted.values())
+        ),
+        row=1,
+        col=2
+    )
+
+    fig.update_layout(
+        height=800,
+        width=1000
+    )
+
     fig.show()
+
+    fig = make_subplots(rows=1, cols=2, specs=[[{'type': 'domain'}, {'type': 'domain'}]],
+                        subplot_titles=('Top 25 Red Champion Selections (Win)',
+                                        'Top 25 Blue Champion Selections (Lose)')
+                        )
+
+    fig.add_trace(
+        go.Pie(
+            name='Red',
+            labels=list(red_win_champs_formatted.keys()),
+            values=list(red_win_champs_formatted.values())
+        ),
+        row=1,
+        col=1
+    )
+
+    fig.add_trace(
+        go.Pie(
+            name='Blue',
+            labels=list(blue_lose_champs_formatted.keys()),
+            values=list(blue_lose_champs_formatted.values())
+        ),
+        row=1,
+        col=2
+    )
+
+    fig.update_layout(
+        height=800,
+        width=1000
+    )
+
+    #fig.show()
+
+
+
+
+
