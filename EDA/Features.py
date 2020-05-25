@@ -504,7 +504,7 @@ def feature_eda(df):
         width=1000
     )
 
-    fig.show()
+    #fig.show()
 
     fig = make_subplots(rows=1, cols=2, specs=[[{'type': 'domain'}, {'type': 'domain'}]],
                         subplot_titles=('Top 25 Red Champion Selections (Win)',
@@ -537,6 +537,142 @@ def feature_eda(df):
     )
 
     #fig.show()
+
+    '''
+    
+    First Baron
+    
+    '''
+    fig = go.Figure(data=[
+        go.Bar(name='Blue', x=[0], y=[np.sum(df['blue_firstBaron'])], width=0.5, marker_color='#084177'),
+        go.Bar(name='Red', x=[1], y=[np.sum(df['red_firstBaron'])], width=0.5, marker_color='#d63447')
+    ])
+
+    fig.update_layout(
+        title='First Baron Count',
+        xaxis=dict(
+            tickvals=[i for i in range(2)],
+            ticktext=['Blue', 'Red'],
+            showticklabels=True
+        ),
+        width=1000,
+        height=800
+    )
+
+    #fig.show()
+
+    blue_win_fbaron = blue_win[blue_win['blue_firstBaron'] == 1]
+    blue_win_nbaron = blue_win[blue_win['blue_firstBaron'] == 0]
+
+    red_win_fbaron = red_win[red_win['red_firstBaron'] == 1]
+    red_win_nbaron = red_win[red_win['red_firstBaron'] == 0]
+
+    fig = go.Figure(data=[
+        go.Pie(
+            labels=['Blue Win with First Baron', 'Blue Win without First Baron'],
+            values=[np.sum(blue_win_fbaron['blueWins']), np.sum(blue_win_nbaron['blueWins'])]
+        )
+    ])
+
+    fig.update_layout(
+        title='Blue Wins With and Without First Baron',
+        height=800,
+        width=1000
+    )
+
+    #fig.show()
+
+    fig = go.Figure(data=[
+        go.Pie(
+            labels=['Red Win with First Baron', 'Red Win without First Baron'],
+            values=[np.sum(red_win_fbaron['redWins']), np.sum(red_win_nbaron['redWins'])]
+        )
+    ])
+
+    fig.update_layout(
+        title='Red Wins With and Without First Baron',
+        height=800,
+        width=1000
+    )
+
+    #fig.show()
+
+    '''
+    
+    First Inhibitor
+    
+    '''
+
+    blue_win_finhibit = blue_win[blue_win['blue_firstInhibitor'] == 1]
+    blue_win_ninhibit = blue_win[blue_win['blue_firstInhibitor'] == 0]
+
+    red_win_finhibit = red_win[red_win['red_firstInhibitor'] == 1]
+    red_win_ninhibit = red_win[red_win['red_firstInhibitor'] == 0]
+
+    fig = go.Figure(data=[
+        go.Pie(
+            labels=['Blue Win with First Inhibitor', 'Blue Win without First Inhibitor'],
+            values=[np.sum(blue_win_finhibit['blueWins']), np.sum(blue_win_ninhibit['blueWins'])]
+        )
+    ])
+
+    fig.update_layout(
+        title='Blue Wins With and Without First Inhibitor',
+        height=800,
+        width=1000
+    )
+
+    #fig.show()
+
+    fig = go.Figure(data=[
+        go.Pie(
+            labels=['Red Win with First Inhibitor', 'Red Win without First Inhibitor'],
+            values=[np.sum(red_win_finhibit['redWins']), np.sum(red_win_ninhibit['redWins'])]
+        )
+    ])
+
+    fig.update_layout(
+        title='Red Wins With and Without First Inhibitor',
+        height=800,
+        width=1000
+    )
+
+    #fig.show()
+
+    '''
+    
+    Tower Kills
+    
+    '''
+
+    fig = go.Figure(data=[
+        go.Histogram(
+            name='Blue Team Killed by Towers (Won)',
+            x=blue_win['red_towerKills']
+        ),
+        go.Histogram(
+            name='Blue Team Killed by Towers (Lost)',
+            x=red_win['red_towerKills']
+        ),
+        go.Histogram(
+            name='Red Team Killed by Towers (Won)',
+            x=red_win['blue_towerKills']
+        ),
+        go.Histogram(
+            name='Red Team Killed by Towers (Lost)',
+            x=blue_win['blue_towerKills']
+        )
+    ])
+
+    fig.update_layout(
+        title='Distribution of Deaths due to Towers',
+        height=800,
+        width=1000
+    )
+
+    fig.show()
+
+
 
 
 

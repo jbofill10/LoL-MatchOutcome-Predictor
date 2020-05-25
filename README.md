@@ -44,7 +44,7 @@ First bloods are important because it provides gold for the team, which allows w
 
 ![image](Charts/FirstBloods.png)
 
-This bar graph takes the sum of games where a certain team got fiirst blood. It is clear that teams that got a first kill are more likely to win, since it does provide advantages as stated earlier.
+This bar graph takes the sum of games where a certain team got first blood. It is clear that teams that got a first kill are more likely to win, since it does provide advantages as stated earlier.
   
 But it is also possible that the team was just overall better and won regardless of the "first blood advantage".
 
@@ -148,4 +148,43 @@ It's interesting to see that Lee Sin is selected more on Red when they lose. I d
 ![image](Charts/ChampSelectionRedWin_BlueLose.png)
 Interesting that when blue loses, Lee Sin is very popular. At the same time, Lee Sin is the third most fequent pick when Red wins.
 
-  
+### First Inhibitor
+
+Inhibitors are a very important structure in League of Legends because it prevents the opposition from training super minions in the lane with the inhibitor destroys. That having said, the team with a destroyed inhibitor would be put at a major disadvantage. I would suspect that teams win significantly more with a first inhibitor destroyed vs. not having destroyed an inhibitor first.
+
+#### Blue Winning With and Without First Inhibitor
+![image](Charts/BlueWin_FInhibitor_NoInhibitor.png)
+
+Quite a difference. The data set is relatively small, but I am certain that if more data was added, the difference would still be large.
+
+#### Red Winning With and Without First Inhibitor
+
+![image](Charts/RedWin_FInhibitor_NoInhibitor.png)
+
+Same result as Blue.
+
+This means that destroying the inhibitor first is probably a good indicator of whether a team wins or not.
+
+### First Baron
+
+The Baron is the strongest monster in league due to providing the team that defeats it buffs including increased attack damage, increased ability power, and increases the power of minions.
+Due to this, I suspect that this will also be a strong indicator of who wins the match.
+
+![image](Charts/BlueWin_Baron_NoBaron.png)
+
+It seems teams usually win more when getting the first baron, but the difference is not as severe as it is with inhibitors.
+
+![image](Charts/RedWin_Baron_NoBaron.png)
+
+The idea is the same as it is with Blue.
+
+I would suspect that getting the first baron helps to lead to the first inhibitor if not destroyed already, which would help secure the game.
+
+### Tower Kills
+
+Since deaths in League can be detrimental to a team, I would assume that if one team dies a lot to towers that they would most likely lose the match.
+
+![image](Charts/TowerKillsDist.png)
+
+This was basically the distribution I had in mind. As a team suffers more deaths to towers, the less likely they win a game. I think this will also be a strong indicator of winning or losing if data values lie outside of 4-6 tower deaths
+
