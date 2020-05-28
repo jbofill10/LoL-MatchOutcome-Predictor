@@ -203,7 +203,7 @@ Some features that will be removed regardless of correlation are: redFirstBlood,
 
 Other than those mentioned, I will keep everything else.
 
-As for the features relating to champions, I will one hot encode all of them. This is return will give me a dataframe with really large dimensions, since there are 139 champions in league, and there are 15 champion related columns.
+As for the features relating to champions, I will one hot encode all of them. This in return will give me a dataframe with really large dimensions, since there are 139 champions in league, and there are 15 champion related columns, the dimensions will grow very rapidly.
 
 This will give me close to 3000 columns total and suggests PCA to be brought into the mix.
 
