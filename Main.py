@@ -1,8 +1,9 @@
 from EDA import Target, Features
+from machine_learning import XGBoost
 
 import pandas as pd
 import QueryGames
-import FeatureEngineering
+import Preprocessing
 
 
 def main():
@@ -18,7 +19,9 @@ def main():
     
     Target.target_eda(df)
 
-    df = FeatureEngineering.feature_engineer(df)
+    preprocessed_df, target = Preprocessing.preprocess(df)
+
+    XGBoost.run_xgboost(preprocessed_df, target)
 
 if __name__ == '__main__':
     main()

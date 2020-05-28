@@ -188,3 +188,25 @@ Since deaths in League can be detrimental to a team, I would assume that if one 
 
 This was basically the distribution I had in mind. As a team suffers more deaths to towers, the less likely they win a game. I think this will also be a strong indicator of winning or losing if data values lie outside of 4-6 tower deaths
 
+# Machine Learning
+
+I will try using several different models in order to pick the most accurate result.
+
+The process through which model selection will occur is by getting feature importance, hyperparameter tuning with 5 fold cv, then train test split to see which model performs the best.
+ 
+
+## Feature Selection
+
+![image](Charts/correlation_matrix.png)
+
+Some features that will be removed regardless of correlation are: redFirstBlood, red_firstInhibitor, red_firstBaron, red_firstRiftHerald, and gameId just because we have the blue counter part to them and gameId is not necessary.
+
+Other than those mentioned, I will keep everything else.
+
+As for the features relating to champions, I will one hot encode all of them. This is return will give me a dataframe with really large dimensions, since there are 139 champions in league, and there are 15 champion related columns.
+
+This will give me close to 3000 columns total and suggests PCA to be brought into the mix.
+
+## XGBoost Classifier
+
+Work in progress 

@@ -3,6 +3,7 @@ from plotly.subplots import make_subplots
 import plotly.graph_objs as go
 import seaborn as sns
 import matplotlib.pyplot as plt
+import matplotlib.style as style
 import numpy as np
 import Champion
 
@@ -384,7 +385,6 @@ def feature_eda(df):
             'ban_6', 'ban_7', 'ban_8', 'ban_9', 'ban_10']
 
     for ban in bans:
-
         fig = make_subplots(rows=1, cols=2, specs=[[{'type': 'domain'}, {'type': 'domain'}]],
                             subplot_titles=('Blue {} {}'.format(ban[0:3], ban[4:]),
                                             'Red {} {}'.format(ban[0:3], ban[4:]))
@@ -431,7 +431,7 @@ def feature_eda(df):
             width=900
         )
 
-        #fig.show()
+        # fig.show()
 
     '''
     
@@ -457,7 +457,7 @@ def feature_eda(df):
         title='Most Frequently Selected Champions'
     )
 
-    #fig.show()
+    # fig.show()
 
     '''
         
@@ -504,7 +504,7 @@ def feature_eda(df):
         width=1000
     )
 
-    #fig.show()
+    # fig.show()
 
     fig = make_subplots(rows=1, cols=2, specs=[[{'type': 'domain'}, {'type': 'domain'}]],
                         subplot_titles=('Top 25 Red Champion Selections (Win)',
@@ -536,7 +536,7 @@ def feature_eda(df):
         width=1000
     )
 
-    #fig.show()
+    # fig.show()
 
     '''
     
@@ -559,7 +559,7 @@ def feature_eda(df):
         height=800
     )
 
-    #fig.show()
+    # fig.show()
 
     blue_win_fbaron = blue_win[blue_win['blue_firstBaron'] == 1]
     blue_win_nbaron = blue_win[blue_win['blue_firstBaron'] == 0]
@@ -580,7 +580,7 @@ def feature_eda(df):
         width=1000
     )
 
-    #fig.show()
+    # fig.show()
 
     fig = go.Figure(data=[
         go.Pie(
@@ -595,7 +595,7 @@ def feature_eda(df):
         width=1000
     )
 
-    #fig.show()
+    # fig.show()
 
     '''
     
@@ -622,7 +622,7 @@ def feature_eda(df):
         width=1000
     )
 
-    #fig.show()
+    # fig.show()
 
     fig = go.Figure(data=[
         go.Pie(
@@ -637,7 +637,7 @@ def feature_eda(df):
         width=1000
     )
 
-    #fig.show()
+    # fig.show()
 
     '''
     
@@ -670,11 +670,18 @@ def feature_eda(df):
         width=1000
     )
 
-    fig.show()
+    # fig.show()
 
+    plt.figure(figsize=(25, 20))
 
+    style.use('seaborn-poster')
+    df_for_corr = df.copy()
 
+    df_for_corr.drop(bans + champs + ['redWins', 'redFirstBlood', 'red_firstInhibitor', 'red_firstBaron', 'red_firstRiftHerald'],  axis=1, inplace=True)
+    corr_df = df_for_corr.corr()
+    print(corr_df)
 
-
-
-
+    sns.heatmap(corr_df)
+    plt.title("Correlation Matrix", fontsize=25)
+    plt.tight_layout()
+    #plt.savefig("Charts/correlation_matrix.png")

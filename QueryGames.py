@@ -5,7 +5,7 @@ from riotwatcher import LolWatcher
 from dotenv import load_dotenv
 from time import sleep
 
-load_dotenv()
+#load_dotenv()
 
 
 def query_games(game_ids):
