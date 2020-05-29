@@ -8,11 +8,12 @@ import Champion
 
 
 def preprocess(df):
-    df.drop(['redFirstBlood', 'red_firstInhibitor', 'red_firstBaron', 'red_firstRiftHerald', 'gameId'],  axis=1, inplace=True)
+    df.drop(['redFirstBlood', 'red_firstInhibitor', 'red_firstBaron', 'red_firstRiftHerald', 'gameId'], axis=1,
+            inplace=True)
 
     champ_cols = ['blue_champ_1', 'blue_champ_2', 'blue_champ_3', 'blue_champ_4', 'blue_champ_5',
-                     'red_champ_1', 'red_champ_2', 'red_champ_3', 'red_champ_4', 'red_champ_5', 'ban_1',
-                     'ban_2', 'ban_3', 'ban_4', 'ban_5', 'ban_6', 'ban_7', 'ban_8', 'ban_9', 'ban_10']
+                  'red_champ_1', 'red_champ_2', 'red_champ_3', 'red_champ_4', 'red_champ_5', 'ban_1',
+                  'ban_2', 'ban_3', 'ban_4', 'ban_5', 'ban_6', 'ban_7', 'ban_8', 'ban_9', 'ban_10']
 
     target = df['blueWins']
 
@@ -20,8 +21,24 @@ def preprocess(df):
 
     for col in champ_cols:
         df[col] = Champion.get_champions(list(df[col].values))
+    removal_list = set()
+    for champ_col in champ_cols:
+
+        for key, value in df[champ_col].value_counts(ascending=False).to_dict().items():
+            if value < 10:
+                for i in range(10):
+                    removal_list.add('ban_{}_{}'.format(i, key))
+                for i in range(5):
+                    removal_list.add('blue_champ_{}_{}'.format(i, key))
+                    removal_list.add('red_champ_{}_{}'.format(i, key))
 
     encoded_df = pd.get_dummies(drop_first=False, columns=champ_cols, data=df)
+
+    print(encoded_df.shape)
+
+    encoded_df = encoded_df[encoded_df.columns[~encoded_df.columns.isin(removal_list)]]
+
+    print(encoded_df.shape)
 
     df_for_scale = df[df.columns[~df.columns.isin(champ_cols)]]
 
@@ -31,18 +48,5 @@ def preprocess(df):
 
     for col in scaled_df:
         encoded_df[col] = scaled_df[col]
-
-    '''skewness = dict()
-    numerical_cols = [i for i in df if df[i].dtype in ['int16', 'int32', 'int64', 'float16', 'float32', 'float64']]
-
-    for i in numerical_cols:
-        if i not in ['gameId', 'blue_champ_1', 'blue_champ_2', 'blue_champ_3', 'blue_champ_4', 'blue_champ_5',
-                     'red_champ_1', 'red_champ_2', 'red_champ_3', 'red_champ_4', 'red_champ_5', 'ban_1',
-                     'ban_2', 'ban_3', 'ban_4', 'ban_5', 'ban_6', 'ban_7', 'ban_8', 'ban_9', 'ban_10']:
-            skewness[i] = skew(df[i])
-
-    skewness = {k: v for k, v in sorted(skewness.items(), key=lambda item: item[1])}
-
-    [print("{}: {}".format(i, skewness[i])) for i in skewness]'''
 
     return encoded_df, target

@@ -205,7 +205,17 @@ Other than those mentioned, I will keep everything else.
 
 As for the features relating to champions, I will one hot encode all of them. This is return will give me a dataframe with really large dimensions, since there are 139 champions in league, and there are 15 champion related columns.
 
-This will give me close to 3000 columns total and suggests PCA to be brought into the mix.
+I plan to one hot encode the champion related columns, but this is problematic. There are currently 135 champions in League of Legends, this means that once I finish one hot encoding, I will have ~2025 extra columns added to my original data set. So I plan to try different methods of reducing the dimensionality and comparing their scores.
+
+I would first like to try removing a certain amount of champions that are hardly used. I will set a threshold at 15 selections to be considered and see what happens.
+
+#####After One Hot Encoding
+![image](Charts/beforeChampReduction.png)
+
+##### After Removing champions selected < 15 times
+![image](Charts/AfterChampReduction.png)
+
+So not bad, but the dimensionality is still really high. I may just try it anyways to see if PCA improves our results or worsens.
 
 ## XGBoost Classifier
 

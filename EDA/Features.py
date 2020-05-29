@@ -679,7 +679,6 @@ def feature_eda(df):
 
     df_for_corr.drop(bans + champs + ['redWins', 'redFirstBlood', 'red_firstInhibitor', 'red_firstBaron', 'red_firstRiftHerald'],  axis=1, inplace=True)
     corr_df = df_for_corr.corr()
-    print(corr_df)
 
     sns.heatmap(corr_df)
     plt.title("Correlation Matrix", fontsize=25)
