@@ -209,7 +209,7 @@ I plan to one hot encode the champion related columns, but this is problematic. 
 
 I would first like to try removing a certain amount of champions that are hardly used. I will set a threshold at 15 selections to be considered and see what happens.
 
-#####After One Hot Encoding
+##### After One Hot Encoding  
 ![image](Charts/beforeChampReduction.png)
 
 ##### After Removing champions selected < 15 times
