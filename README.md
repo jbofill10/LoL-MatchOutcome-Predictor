@@ -203,7 +203,7 @@ Some features that will be removed regardless of correlation are: redFirstBlood,
 
 Other than those mentioned, I will keep everything else.
 
-As for the features relating to champions, I will one hot encode all of them. This is return will give me a dataframe with really large dimensions, since there are 139 champions in league, and there are 15 champion related columns.
+As for the features relating to champions, I will one hot encode all of them. This in return will give me a dataframe with really large dimensions, since there are 139 champions in league, and there are 15 champion related columns, the dimensions will grow very rapidly.
 
 I plan to one hot encode the champion related columns, but this is problematic. There are currently 135 champions in League of Legends, this means that once I finish one hot encoding, I will have ~2025 extra columns added to my original data set. So I plan to try different methods of reducing the dimensionality and comparing their scores.
 
