@@ -15,9 +15,10 @@ def run_xgboost(df, target):
         'n_jobs': [-1]
 
     }
-    model = XGBClassifier(tree_method='gpu_hist', gpu_id=0)
+
+    model = XGBClassifier(tree_method='gpu_hist')
     grid = GridSearchCV(estimator=model, param_grid=params, cv=5, verbose=3, scoring='accuracy')
-    
+
     grid.fit(df, target)
     print(grid.best_params_)
     with open('Data/pickles/xgboost_model', 'wb') as file:

@@ -212,11 +212,54 @@ I would first like to try removing a certain amount of champions that are hardly
 ##### After One Hot Encoding  
 ![image](Charts/beforeChampReduction.png)
 
-##### After Removing champions selected < 15 times
+##### After Removing champions selected < 15 times  
 ![image](Charts/AfterChampReduction.png)
 
 So not bad, but the dimensionality is still really high. I may just try it anyways to see if PCA improves our results or worsens.
 
+## Reducing Dimensionality  
+
+After 3 days of training, I decided that the dimensions of the data were too high to continue and required research on how to handle this situation.
+
+I began by looking into Logistic PCA, but unfortunately there are no Python packages for that. I would've made one myself had I known Linear Algebra (haven't taken that course yet, but soon I will)
+
+I then looked into MCA, which deals with nominal values in data. I read some papers to grasp an understanding of Multiple Correspondence Analysis and decided this would be my approach to reducing the dimensionality of my data.
+
+I plan to do a grid search on optimal components for MCA, but for now I am deciding to do 5 components for both champion selections (red and blue) and ban selections.
+
+On top of this, I will experiment with applying log1p and PCA to my continuous data related columns to see how that effects the accuracy.
+
+### After Applying MCA and PCA  
+My dataframe now has the dimensions of 9879 x 29. This is a considerable improvement and the training process should be much quicker now.
+
+### Normalizing Continuous Data
+Since PCA assumes Gaussian, I am going to apply log1p transformations to the features with high skew values.
+
+#### Skewness
+![image](Charts/skewness.png)
+
+The only features that will require transformations are blue/redWardsPlaced and blue/redTowersDestroyed.
+
+#### Kurtosis
+![image](Charts/Kurtosis.png)  
+The same features that are very skewed also have high kurtosis.
+
+#### After Log1p
+![image](Charts/AfterLog1p.png)  
+I would've liked blue/redTowers to be a little lower, but it should be OK.
+The log transformation helped lower the Kurtosis score, but outliers are still very present in towers destroyed. 
+
+This is fine though, as the reason for the outliers is that many times, no towers are destroyed within the first 10 min. That means that if one tower is destroyed, it is significant regarding whether a team wins or not.
+
 ## XGBoost Classifier
 
 Work in progress 
+
+# Sources
+
+[Multiple Corresdondence Analysis](https://www.researchgate.net/profile/Dominique_Valentin/publication/239542271_Multiple_Correspondence_Analysis/links/54a979900cf256bf8bb95c95.pdf) by Hervé Abdi & Dominique Valentin
+
+[Variable Extractions using Principal Components
+Analysis and Multiple Correspondence Analysis for
+Large Number of Mixed Variables Classification
+Problems](https://s3.amazonaws.com/academia.edu.documents/50782331/GJPAM_Published.pdf?response-content-disposition=inline%3B%20filename%3DVariable_Extractions_using_Principal_Com.pdf&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIATUSBJ6BAG7F36CVX%2F20200530%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20200530T070022Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEKX%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJHMEUCIQD3gSoTHQ63nANvvqMflElvp2TbA9R7XSTkFbbPulMQ6QIgQgPJBUDeT5o%2BJsw5Pc7J7jWr4s38dLlCHw%2B1a8XY%2BAMqvQMI%2Fv%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARAAGgwyNTAzMTg4MTEyMDAiDKwvShduLVGpTOEQUSqRA4XRIgf7eWeKKhYlHQzWolE5Vk1g9dfu73310GIKNjPIPqN5ocYMMnsJJkSPha4Cpbab41m6x3hIxjstzVkMBf8qa65WEE7vJA%2BWtPfntmgNieznvvb8fdEiEPjjwmHlFbbRDVw8WVboG5CvCBV2En1f3Audu1%2BVvOr3x6wfS1uJSQVPjYFP2cXkIr3wIJBDhqjWQZfl36pNHR%2BU2z5pTrn8jgQ0lgkiw%2Bnp01hJqnc3CsteBLcES5J1TgfPkBnBF2VfQECRuYejOkzyhq%2F8fsvP%2BIbEisjuzDiTgHqeWwIs%2BCXlZsiJLR1OK2iEd2hMl0gzUDXxl2yoqmkpv83AUchh%2BtORGjTJE7yA26MSX57aqeGZz%2Fqf1kj4Hj8pW4B7%2FUUcPXhpQ5ryDYKzyYtULzDCRQpif%2FjBUr1bZFj48jeIUY5bppEvyGsF8YJ5YiAS13jRysxz7FPG8XjoQm8%2BR84uYJqLsbNhBb0N3XMrisJ89er2DOg8iuoMH%2FWWBXIsdRjkFymb75xItgLipBEbFZqfMJLFx%2FYFOusBGpR9%2BtvXEK4vPfs95BDFzEu8kGK4pgB1M9PqxJPY9SzATCWo3%2FD3MDRC3OjWwbyZkhtYvehnipLldJwwjXNZAoQ%2BHJ2lwX8G8ZZMVvLkHb1Hp8WKhhOs4qEbaYrzbLgwi0UucN4yRw1Doi6BADo8k4fgZ1n5sVM0mH6mzPNpos%2BSuzm0lrVVd4SEQB1X7%2FEdiagrGzurSiVpMtCynpZzWnlKqWz10AcJS81KhZoLY%2FLbQiPWeutHOSZNvLVRzesqIx6wWoNliRH1yndEJhFC95IAuTT6fGphp6OFVACauf84tYzx5WMMYF0Csg%3D%3D&X-Amz-Signature=1365def7559093df3d23d4dae2e967cefb5f825fc808e02bc5095d18acc89b1d) by Hashibah Hamid, Nazrina Aziz, and Penny Ngu Ai Huong
