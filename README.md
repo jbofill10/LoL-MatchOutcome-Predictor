@@ -251,9 +251,25 @@ The log transformation helped lower the Kurtosis score, but outliers are still v
 
 This is fine though, as the reason for the outliers is that many times, no towers are destroyed within the first 10 min. That means that if one tower is destroyed, it is significant regarding whether a team wins or not.
 
-## XGBoost Classifier
+## Model Selection
+All models will have their hyperparameters tuned with a grid search and 5 fold cv.
 
-Work in progress 
+So far, I have suspicion that Logistic Regression and XGBoost may be overfitting.
+Since I have endless games to pull from, that would be the best way to test these models against data that has not been seen before.
+
+### Logistic Regression
+
+![image](Charts/logit_res.png)
+
+Really high accuracy score. Potential overfitting
+
+### XGBoost Classifier
+
+Tuned hyperparameters with a grid search and 5 fold cv
+
+![image](Charts/xgboost_res.png)  
+
+The accuracy falls around 95% - 99%. I suspect overfitting as well, but I am going to mess with more models to see what happens.
 
 # Sources
 

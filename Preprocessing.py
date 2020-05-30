@@ -77,8 +77,6 @@ def preprocess(df):
 
     reduced_df = pd.concat([ban_mca, select_mca, pca_df], axis=1)
 
-    print(reduced_df)
-
     return reduced_df, target
 
 
