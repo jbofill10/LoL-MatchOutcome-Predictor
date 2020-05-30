@@ -1,5 +1,8 @@
-# LoL-MatchOutcome-Predictor
+# League of Legends Match Outcome Classifier
 Using a data set of 10k Diamond and Master games with data from the first 10 min, along with the Riot Games API to get even more data about each game in the data set to predict the outcome of games.
+
+The Jupyter Notebook equivalent of this README with interactive plots can be found here:  
+https://www.kaggle.com/jbofill/league-of-legends-match-outcome-classifier
 
 # EDA
 
