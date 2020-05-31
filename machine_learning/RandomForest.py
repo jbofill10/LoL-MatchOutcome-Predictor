@@ -6,9 +6,9 @@ import os
 import pickle
 
 
-def run_rf(x_train, y_train, x_test, y_test):
+def train(x_train, y_train):
     param_grid = {
-        'n_estimators': [10, 50, 100, 300, 500, 700, 1000, 1500, 2000],
+        'n_estimators': [10, 50, 100, 300, 500],
         'max_depth': [1, 3, 5],
         'bootstrap': [True, False],
         'max_features': ['auto', 'sqrt'],
@@ -21,5 +21,19 @@ def run_rf(x_train, y_train, x_test, y_test):
 
     grid.fit(x_train, y_train)
 
-    with open('Data/pickles/logit_model', 'wb') as file:
+    with open('Data/pickles/rf', 'wb') as file:
         pickle.dump(grid, file)
+
+
+def predict(x_test, y_test):
+    with open('Data/pickles/rf', 'rb') as file:
+        grid = pickle.load(file)
+
+    print(grid.best_params_)
+
+    model = grid.best_estimator_
+
+    y_pred = model.predict(x_test)
+
+    print(confusion_matrix(y_test, y_pred))
+    print(accuracy_score(y_test, y_pred))
