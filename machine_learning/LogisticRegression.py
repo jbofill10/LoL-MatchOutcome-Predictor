@@ -8,24 +8,27 @@ import warnings
 warnings.filterwarnings('ignore')
 
 
-def run_logit(x_train, y_train, x_test, y_test):
-    if not os.path.isfile('Data/pickles/logit_model'):
-        param_grid = {
-            'penalty': ['l2', 'none'],
-            'C': [0.001, 0.005, 0.01, 0.05, 0.1, 0.5, 1, 10, 100],
-            'fit_intercept': [True, False],
-            'n_jobs': [-1]
-        }
+def train(x_train, y_train):
+    param_grid = {
+        'penalty': ['l2', 'none'],
+        'C': [0.001, 0.005, 0.01, 0.05, 0.1, 0.5, 1, 10, 100],
+        'fit_intercept': [True, False],
+        'n_jobs': [-1]
+    }
 
-        grid = GridSearchCV(LogisticRegression(), param_grid, verbose=3, cv=5)
+    grid = GridSearchCV(LogisticRegression(), param_grid, verbose=3, cv=5)
 
-        grid.fit(x_train, y_train)
+    grid.fit(x_train, y_train)
 
-        with open('Data/pickles/logit_model', 'wb') as file:
-            pickle.dump(grid, file)
-    else:
-        with open('Data/pickles/logit_model', 'rb') as file:
-            grid = pickle.load(file)
+    with open('Data/pickles/logit_model', 'wb') as file:
+        pickle.dump(grid, file)
+
+
+def predict(x_test, y_test):
+    with open('Data/pickles/logit_model', 'rb') as file:
+        grid = pickle.load(file)
+
+    print(grid.best_params_)
 
     model = grid.best_estimator_
 
