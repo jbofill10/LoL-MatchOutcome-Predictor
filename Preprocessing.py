@@ -13,7 +13,7 @@ import Champion
 import numpy as np
 
 
-def preprocess(df):
+def preprocess(df, train_length):
     df.drop(['redFirstBlood', 'red_firstInhibitor', 'red_firstBaron', 'red_firstRiftHerald', 'gameId'], axis=1,
             inplace=True)
 
@@ -21,7 +21,8 @@ def preprocess(df):
                   'red_champ_1', 'red_champ_2', 'red_champ_3', 'red_champ_4', 'red_champ_5', 'ban_1',
                   'ban_2', 'ban_3', 'ban_4', 'ban_5', 'ban_6', 'ban_7', 'ban_8', 'ban_9', 'ban_10']
 
-    target = df['blueWins']
+    train_target = df['blueWins'].iloc[:train_length].reset_index(drop=True)
+    test_target = df['blueWins'].iloc[train_length:].reset_index(drop=True)
 
     df.drop(['blueWins', 'redWins'], axis=1, inplace=True)
 
@@ -50,21 +51,24 @@ def preprocess(df):
     
     for col in cols_to_be_transformed:
         df[col] = np.log1p(df[col])
-        
+
     #evaluate_dist(df, cols_to_be_transformed)
 
-    df_for_scale = df[df.columns[~df.columns.isin(champ_cols)]]
+    train_df = df.iloc[:train_length].reset_index(drop=True)
+    test_df = df.iloc[train_length:, :].reset_index(drop=True)
+
+    train_df_for_scale = train_df[train_df.columns[~train_df.columns.isin(champ_cols)]]
 
     scaler = RobustScaler()
-    scaled_data = scaler.fit_transform(df_for_scale)
+    scaled_data = scaler.fit_transform(train_df_for_scale)
     pca = PCA(.95)
     pcs = pca.fit_transform(scaled_data)
 
-    pca_df = pd.DataFrame(pcs, columns=['PC_{}'.format(i) for i in range(np.size(pcs, 1))])
+    train_pca_df = pd.DataFrame(pcs, columns=['PC_{}'.format(i) for i in range(np.size(pcs, 1))])
 
-    champ_df = df[df.columns[df.columns.isin(champ_cols)]]
+    champ_df = train_df[train_df.columns[train_df.columns.isin(champ_cols)]]
     champ_select_df = champ_df[champ_cols[:10]]
-    champ_ban_df = champ_df[champ_cols[11:]]
+    champ_ban_df = champ_df[champ_cols[10:]]
 
     mca_ban = MCA(n_components=5)
     mca_select = MCA(n_components=3)
@@ -75,9 +79,29 @@ def preprocess(df):
     ban_mca.columns = ['MCA_Ban_{}'.format(i) for i in range(np.size(ban_mca, 1))]
     select_mca.columns = ['MCA_Select_{}'.format(i) for i in range(np.size(select_mca, 1))]
 
-    reduced_df = pd.concat([ban_mca, select_mca, pca_df], axis=1)
+    train_reduced_df = pd.concat([ban_mca, select_mca, train_pca_df], axis=1)
 
-    return reduced_df, target
+    test_df_for_scale = test_df[test_df.columns[~test_df.columns.isin(champ_cols)]]
+
+    scaled_data = scaler.transform(test_df_for_scale)
+
+    pcs = pca.transform(scaled_data)
+
+    test_pca_df = pd.DataFrame(pcs, columns=['PC_{}'.format(i) for i in range(np.size(pcs, 1))])
+
+    champ_df = test_df[test_df.columns[test_df.columns.isin(champ_cols)]]
+    champ_select_df = champ_df[champ_cols[:10]]
+    champ_ban_df = champ_df[champ_cols[10:]]
+
+    ban_mca = mca_ban.fit_transform(champ_ban_df)
+    select_mca = mca_select.fit_transform(champ_select_df)
+
+    ban_mca.columns = ['MCA_Ban_{}'.format(i) for i in range(np.size(ban_mca, 1))]
+    select_mca.columns = ['MCA_Select_{}'.format(i) for i in range(np.size(select_mca, 1))]
+
+    test_reduced_df = pd.concat([ban_mca, select_mca, test_pca_df], axis=1)
+
+    return train_reduced_df, test_reduced_df, train_target, test_target
 
 
 def evaluate_dist(df, cols):
@@ -102,3 +126,5 @@ def evaluate_dist(df, cols):
     [print("{}: {}".format(i, kurtosis_results[i])) for i in kurtosis_results]
 
     print("\n\n")
+
+

@@ -233,7 +233,7 @@ I plan to do a grid search on optimal components for MCA, but for now I am decid
 On top of this, I will experiment with applying log1p and PCA to my continuous data related columns to see how that effects the accuracy.
 
 ### After Applying MCA and PCA  
-My dataframe now has the dimensions of 9879 x 29. This is a considerable improvement and the training process should be much quicker now.
+My dataframe now has the dimensions of 9879 x 26 This is a considerable improvement and the training process should be much quicker now.
 
 ### Normalizing Continuous Data
 Since PCA assumes Gaussian, I am going to apply log1p transformations to the features with high skew values.
@@ -274,7 +274,31 @@ Tuned hyperparameters with a grid search and 5 fold cv
 
 The accuracy falls around 95% - 99%. I suspect overfitting as well, but I am going to mess with more models to see what happens.
 
-# Sources
+## Model Selection Using Custom Test Data Set
+Since I suspected my models might be overfitting, I grabbed 5k more games to add to my validation data set.
+As of now, the models are being trained by 9879 games and are attempting to predict 5559 results.
+
+I will discontinue the use of using the train test split, as I see no reason to use it since the validation set is twice as small as my custom test data set.
+
+### Logistic Regression
+
+![image](Charts/logit_custom.png)
+
+The accuracy went down by 1% due to increasing the validation data set by more than double, which is pretty good.
+
+### XGBoost Classifier
+
+![image](Charts/xgboost_custom.png)
+
+A huge performance drop with XGBoost, which is interesting. Originally, the model's accuracy was around 96% - 99%. It seems that XGBoost was overfitting to some degree.
+
+### Random Forest Classifier
+
+![image](Charts/RF_Results.png)
+
+RF seems to be the model that performs the worst so far.
+
+# Acknowledgements
 
 [Multiple Corresdondence Analysis](https://www.researchgate.net/profile/Dominique_Valentin/publication/239542271_Multiple_Correspondence_Analysis/links/54a979900cf256bf8bb95c95.pdf) by Hervé Abdi & Dominique Valentin
 
