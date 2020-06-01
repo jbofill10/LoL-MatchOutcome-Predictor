@@ -1,6 +1,7 @@
-from EDA import Target, Features
-from machine_learning import XGBoost, LogisticRegression, RandomForest
+from EDA import Target, Features, ModelResults
+from machine_learning import XGBoost, LogisticRegression, RandomForest, SVM
 from sklearn.model_selection import train_test_split
+
 
 import pandas as pd
 import QueryGames
@@ -25,7 +26,7 @@ def main():
     df.drop(['blue_firstBlood', 'red_firstBlood'], axis=1, inplace=True)
 
     Features.feature_eda(df)
-    
+
     Target.target_eda(df)
 
     if not os.path.isfile('Data/pickles/more_gameids'):
@@ -63,7 +64,7 @@ def main():
             more_games_df = more_games_df.append(QueryGames.game_timeline(i), ignore_index=True)
 
             counter += 1
-            print('{} Queries remaining'.format(len(more_game_ids)-counter))
+            print('{} Queries remaining'.format(len(more_game_ids) - counter))
 
         more_games_df.to_pickle('Data/pickles/more_games')
     else:
@@ -82,14 +83,22 @@ def main():
 
     train_df, test_df, train_target, test_target = Preprocessing.preprocess(combined_df, len(df))
 
-    #XGBoost.train(train_df, train_target)
-    XGBoost.predict(test_df, test_target)
+    # XGBoost.train(train_df, train_target)
 
-    #LogisticRegression.train(train_df, train_target)
-    LogisticRegression.predict(test_df, test_target)
+    # LogisticRegression.train(train_df, train_target)
 
-    #RandomForest.train(train_df, train_target)
-    RandomForest.predict(test_df, test_target)
+    # RandomForest.train(train_df, train_target)
+
+    # SVM.train(train_df, train_target)
+
+    model_results = {
+        'XGBoost': XGBoost.predict(test_df, test_target),
+        'Logistic Regression': LogisticRegression.predict(test_df, test_target),
+        'Random Forest': RandomForest.predict(test_df, test_target),
+        'Support Vector Machine': SVM.predict(test_df, test_target)
+    }
+
+    ModelResults.visualize(model_results)
 
 
 if __name__ == '__main__':

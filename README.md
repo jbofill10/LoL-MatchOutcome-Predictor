@@ -260,6 +260,10 @@ All models will have their hyperparameters tuned with a grid search and 5 fold c
 So far, I have suspicion that Logistic Regression and XGBoost may be overfitting.
 Since I have endless games to pull from, that would be the best way to test these models against data that has not been seen before.
 
+
+![image](Charts/matrix_subplot.png)
+
+
 ### Logistic Regression
 
 ![image](Charts/logit_res.png)
