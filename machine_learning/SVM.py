@@ -1,4 +1,4 @@
-from sklearn.ensemble import RandomForestClassifier
+from sklearn.svm import SVC
 from sklearn.model_selection import GridSearchCV
 from sklearn.metrics import confusion_matrix, accuracy_score
 
@@ -11,28 +11,25 @@ import matplotlib.style as style
 
 def train(x_train, y_train):
     param_grid = {
-        'n_estimators': [10, 50, 100, 300, 500],
-        'max_depth': [1, 3, 5],
-        'bootstrap': [True, False],
-        'max_features': ['auto', 'sqrt'],
-        'min_samples_leaf': [1, 2, 4],
-        'min_samples_split': [2, 5, 10],
-        'oob_score': [True, False]
+
+        'C': [0.01, 0.05, 0.1, 0.5, 1, 5, 10, 20, 50, 70, 100],
+        'gamma': ['scale', 'auto'],
+        'kernel': ['rbf', 'poly', 'sigmoid'],
+        'degree': [1, 2, 3, 4, 5],
+
     }
 
-    grid = GridSearchCV(RandomForestClassifier(), param_grid, verbose=3, cv=5)
+    grid = GridSearchCV(SVC(), param_grid=param_grid, verbose=3, cv=5)
 
     grid.fit(x_train, y_train)
 
-    with open('Data/pickles/rf', 'wb') as file:
+    with open('Data/pickles/svc', 'wb') as file:
         pickle.dump(grid, file)
 
 
 def predict(x_test, y_test):
-    with open('Data/pickles/rf', 'rb') as file:
+    with open('Data/pickles/svc', 'rb') as file:
         grid = pickle.load(file)
-
-    print(grid.best_params_)
 
     model = grid.best_estimator_
 

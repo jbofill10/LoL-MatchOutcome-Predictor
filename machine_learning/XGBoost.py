@@ -2,8 +2,12 @@ from xgboost import XGBClassifier
 from sklearn.model_selection import GridSearchCV
 from sklearn.metrics import confusion_matrix, accuracy_score
 
+
 import os
 import pickle
+import seaborn as sns
+import matplotlib.pyplot as plt
+import matplotlib.style as style
 
 
 def train(x_train, y_train):
@@ -36,3 +40,5 @@ def predict(x_test, y_test):
 
     print(confusion_matrix(y_test, y_pred))
     print(accuracy_score(y_test, y_pred))
+
+    return confusion_matrix(y_test, y_pred)
