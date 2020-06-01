@@ -672,7 +672,7 @@ def feature_eda(df):
 
     # fig.show()
 
-    plt.figure(figsize=(25, 20))
+    #plt.figure(figsize=(25, 20))
 
     style.use('seaborn-poster')
     df_for_corr = df.copy()
@@ -684,3 +684,5 @@ def feature_eda(df):
     plt.title("Correlation Matrix", fontsize=25)
     plt.tight_layout()
     #plt.savefig("Charts/correlation_matrix.png")
+
+    plt.clf()
